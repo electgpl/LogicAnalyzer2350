@@ -582,6 +582,9 @@ class LA8Device:
 # ----------------------------------------------------------------------
 #                                   GUI
 # ----------------------------------------------------------------------
+WINDOWS = []          # ventanas abiertas (la principal y las de comparación)
+
+
 def main():
     import pyqtgraph as pg
     from pyqtgraph.Qt import QtCore, QtGui, QtWidgets
@@ -932,6 +935,52 @@ def main():
                 b = QtWidgets.QPushButton(txt)
                 b.clicked.connect(fn)
                 tb.addWidget(b)
+            tb.addSeparator()
+            # Comparación de capturas
+            for txt, fn in (("Abrir en ventana…", self._open_windows),
+                            ("Superponer .npz…", self._load_overlay),
+                            ("Quitar superposición", self._clear_overlay)):
+                b = QtWidgets.QPushButton(txt)
+                b.clicked.connect(fn)
+                tb.addWidget(b)
+            self.chk_sync = QtWidgets.QCheckBox("Sincronizar zoom")
+            self.chk_sync.toggled.connect(self._toggle_sync)
+            tb.addWidget(self.chk_sync)
+
+            # Tercera fila: desplazamiento de la referencia superpuesta
+            self.addToolBarBreak()
+            self.tb_ov = QtWidgets.QToolBar()
+            self.tb_ov.setMovable(False)
+            self.addToolBar(self.tb_ov)
+            self.ov_name = QtWidgets.QLabel(" Referencia: — ")
+            self.tb_ov.addWidget(self.ov_name)
+            self.tb_ov.addWidget(QtWidgets.QLabel("  Desplazamiento "))
+            self.ov_shift = QtWidgets.QDoubleSpinBox()
+            self.ov_shift.setDecimals(1)
+            self.ov_shift.setRange(-1e9, 1e9)
+            self.ov_shift.setSuffix(" ns")
+            self.ov_shift.setMinimumWidth(130)
+            self.ov_shift.setKeyboardTracking(False)
+            self.ov_shift.valueChanged.connect(lambda _: self._draw_overlay())
+            self.tb_ov.addWidget(self.ov_shift)
+            for txt, k in (("◀◀ 10", -10), ("◀ 1", -1), ("1 ▶", 1), ("10 ▶▶", 10)):
+                b = QtWidgets.QPushButton(txt)
+                b.setToolTip(f"Desplaza la referencia {abs(k)} muestra(s)")
+                b.clicked.connect(lambda _, k=k: self._nudge_overlay(k))
+                self.tb_ov.addWidget(b)
+            b = QtWidgets.QPushButton("Alinear auto")
+            b.setToolTip("Busca el desplazamiento que mejor hace coincidir la referencia con la "
+                         "captura actual, dentro del tramo visible")
+            b.clicked.connect(self._auto_align_overlay)
+            self.tb_ov.addWidget(b)
+            b = QtWidgets.QPushButton("Cero")
+            b.clicked.connect(lambda: self.ov_shift.setValue(0.0))
+            self.tb_ov.addWidget(b)
+            self.chk_ov_sep = QtWidgets.QCheckBox("Separar verticalmente")
+            self.chk_ov_sep.setToolTip("Dibuja la referencia un poco más abajo para ver ambas formas de onda")
+            self.chk_ov_sep.toggled.connect(lambda _: self._draw_overlay())
+            self.tb_ov.addWidget(self.chk_ov_sep)
+            self.tb_ov.setVisible(False)
             self.radix_cb = QtWidgets.QComboBox()
             self.radix_cb.addItems(["HEX", "DEC", "BIN", "ASCII"])
             self.radix_cb.currentTextChanged.connect(lambda _: self._draw_annotations())
@@ -949,6 +998,18 @@ def main():
             self.left_axis = ax
             ax.setWidth(120)
             self.curves = []
+            # Superposición de referencia (debajo de la captura actual) y marcas de diferencia
+            self.ref = None
+            self.ref_curves, self.diff_curves = [], []
+            for i in range(8):
+                col = QtGui.QColor(CH_COLORS[i])
+                col.setAlpha(110)
+                rc = pg.PlotDataItem(pen=pg.mkPen(col, width=5))
+                self.plot.addItem(rc)
+                self.ref_curves.append(rc)
+                dc = pg.PlotDataItem(pen=pg.mkPen("#ff3b3b", width=4), connect="finite")
+                self.plot.addItem(dc)
+                self.diff_curves.append(dc)
             for i in range(8):
                 c = pg.PlotDataItem(pen=pg.mkPen(CH_COLORS[i], width=2))
                 self.plot.addItem(c)
@@ -984,6 +1045,12 @@ def main():
             self.cur_lbl = QtWidgets.QLabel("—")
             self.cur_lbl.setObjectName("cursors")
             dl.addWidget(self.cur_lbl)
+            b_cur = QtWidgets.QPushButton("Traer cursores a la vista")
+            b_cur.setToolTip("Ubica T1 y T2 dentro del tramo visible. "
+                             "También: doble clic = T1, Shift + doble clic = T2")
+            b_cur.clicked.connect(self._bring_cursors)
+            dl.addWidget(b_cur)
+            self.plot.scene().sigMouseClicked.connect(self._plot_clicked)
 
             self.model = FrameModel()
             self.table = QtWidgets.QTableView()
@@ -1231,6 +1298,8 @@ def main():
             self.cur[0].setValue(x0 + 0.25 * (x1 - x0))
             self.cur[1].setValue(x0 + 0.30 * (x1 - x0))
             self._run_decoders()
+            if self.ref is not None:
+                self._draw_overlay()
 
         def _run_decoders(self):
             self.frames = []
@@ -1314,6 +1383,22 @@ def main():
             c = ((f.s0 + f.s1) / 2 - self.t0) / self.fs
             self.plot.setXRange(c - w / 2, c + w / 2, padding=0)
 
+        def _bring_cursors(self):
+            (vx0, vx1), _ = self.plot.getViewBox().viewRange()
+            w = vx1 - vx0
+            self.cur[0].setValue(vx0 + w / 3)
+            self.cur[1].setValue(vx0 + 2 * w / 3)
+
+        def _plot_clicked(self, ev):
+            if not ev.double():
+                return
+            vb = self.plot.getViewBox()
+            if not vb.sceneBoundingRect().contains(ev.scenePos()):
+                return
+            x = vb.mapSceneToView(ev.scenePos()).x()
+            shift = bool(ev.modifiers() & QtCore.Qt.KeyboardModifier.ShiftModifier)
+            self.cur[1 if shift else 0].setValue(x)
+
         def _update_cursors(self):
             t1, t2 = self.cur[0].value(), self.cur[1].value()
             dt = t2 - t1
@@ -1337,6 +1422,170 @@ def main():
             if fn:
                 z = np.load(fn)
                 self._set_data(z["data"], float(z["fs"]), int(z["trig"]))
+                self.setWindowTitle(f"LA8 Viewer — {os.path.basename(fn)}")
+
+        # ---- Comparación de capturas ----
+        def _open_windows(self):
+            fns, _ = QtWidgets.QFileDialog.getOpenFileNames(self, "Abrir capturas en ventanas nuevas", "", "*.npz")
+            for k, fn in enumerate(fns):
+                z = np.load(fn)
+                nw = MainWindow()
+                nw.decoders = [dict(c) for c in self.decoders]      # mismos analizadores
+                nw.radix_cb.setCurrentText(self.radix_cb.currentText())
+                nw._refresh_dec_list()
+                nw._set_data(z["data"], float(z["fs"]), int(z["trig"]))
+                nw.setWindowTitle(f"LA8 Viewer — {os.path.basename(fn)}")
+                nw.resize(self.size())
+                nw.move(self.pos() + QtCore.QPoint(40 * (k + 1), 40 * (k + 1)))
+                nw.show()
+                WINDOWS.append(nw)
+                if self.chk_sync.isChecked():
+                    nw.chk_sync.setChecked(True)
+
+        def _toggle_sync(self, on):
+            """Vincula el eje de tiempo (t = 0 en el trigger) de todas las ventanas abiertas."""
+            for w in WINDOWS:
+                if w.chk_sync.isChecked() != on:
+                    w.chk_sync.blockSignals(True)
+                    w.chk_sync.setChecked(on)
+                    w.chk_sync.blockSignals(False)
+            for w in WINDOWS:
+                vb = w.plot.getViewBox()
+                if on and not getattr(w, "_sync_connected", False):
+                    vb.sigXRangeChanged.connect(w._on_xrange)
+                    w._sync_connected = True
+                    vb.setLimits(xMin=None, xMax=None)
+            if on:
+                self._on_xrange(self.plot.getViewBox(), self.plot.getViewBox().viewRange()[0])
+
+        def _on_xrange(self, vb, rng):
+            # Mismo rango de tiempo en todas las ventanas (alineadas por t = 0 = trigger).
+            # No se usa setXLink porque pyqtgraph alinea por posición en pantalla.
+            if not self.chk_sync.isChecked() or getattr(MainWindow, "_syncing", False):
+                return
+            MainWindow._syncing = True
+            try:
+                for w in WINDOWS:
+                    if w is not self and w.chk_sync.isChecked():
+                        w.plot.setXRange(rng[0], rng[1], padding=0)
+            finally:
+                MainWindow._syncing = False
+
+        def _load_overlay(self):
+            if self.data is None:
+                self._on_error("Primero cargue o capture una señal para comparar.")
+                return
+            fn, _ = QtWidgets.QFileDialog.getOpenFileName(self, "Superponer captura de referencia", "", "*.npz")
+            if not fn:
+                return
+            z = np.load(fn)
+            self.ref = (z["data"], float(z["fs"]), int(z["trig"]) - 0.5, os.path.basename(fn))
+            self.ov_name.setText(f" Referencia: {os.path.basename(fn)} ")
+            self.ov_shift.blockSignals(True)
+            self.ov_shift.setValue(0.0)
+            self.ov_shift.setSingleStep(1e9 / self.fs)          # una muestra de la captura actual
+            self.ov_shift.blockSignals(False)
+            self.tb_ov.setVisible(True)
+            self._draw_overlay()
+
+        def _nudge_overlay(self, k):
+            if self.ref is not None:
+                self.ov_shift.setValue(self.ov_shift.value() + k * 1e9 / self.fs)
+
+        def _auto_align_overlay(self):
+            """Correlación cruzada (FFT) de los 8 canales en el tramo visible: elige el
+            desplazamiento entero, en muestras de la captura actual, con más coincidencias."""
+            if self.ref is None or self.data is None:
+                return
+            rd, rfs, rt0, _ = self.ref
+            d, fs, t0 = self.data, self.fs, self.t0
+            n = d.shape[1]
+            (vx0, vx1), _ = self.plot.getViewBox().viewRange()
+            i0 = int(max(0, np.floor(vx0 * fs + t0)))
+            i1 = int(min(n, np.ceil(vx1 * fs + t0) + 1))
+            if i1 - i0 < 16:
+                return
+            idx = np.arange(i0, i1)
+            t = (idx - t0) / fs
+            span = i1 - i0
+            maxlag = max(1, span // 2)
+            # referencia remuestreada en la grilla actual, en una ventana extendida ±maxlag
+            ext = np.arange(i0 - maxlag, i1 + maxlag)
+            te = (ext - t0) / fs
+            ri = np.rint(te * rfs + rt0).astype(np.int64)
+            valid = (ri >= 0) & (ri < rd.shape[1])
+            ric = np.clip(ri, 0, rd.shape[1] - 1)
+            N = 1 << int(np.ceil(np.log2(len(ext) + span)))
+            acc = np.zeros(N)
+            for ch in range(8):
+                a = d[ch, i0:i1].astype(float) * 2 - 1
+                b = np.where(valid, rd[ch][ric].astype(float) * 2 - 1, 0.0)
+                if a.std() == 0 and b.std() == 0:
+                    continue
+                acc += np.fft.irfft(np.conj(np.fft.rfft(a, N)) * np.fft.rfft(b, N), N)
+            # acc[m] = sum a[n] * b[n + m]; la referencia en b[n + m] coincide con a[n]
+            # -> hay que correr la referencia m - maxlag muestras hacia atrás
+            lags = np.arange(0, 2 * maxlag + 1)
+            m = int(lags[np.argmax(acc[lags])])
+            shift_samples = -(m - maxlag)
+            self.ov_shift.setValue(shift_samples * 1e9 / fs)
+            self.statusBar().showMessage(self.statusBar().currentMessage() +
+                                         f"  · alineada automáticamente ({shift_samples:+d} muestras)")
+
+        def _clear_overlay(self):
+            self.ref = None
+            self.tb_ov.setVisible(False)
+            for i in range(8):
+                self.ref_curves[i].setData([], [])
+                self.diff_curves[i].setData([], [])
+            self.statusBar().showMessage("Superposición quitada")
+
+        def _draw_overlay(self):
+            if self.ref is None:
+                return
+            rd, rfs, rt0, name = self.ref
+            sh = self.ov_shift.value() * 1e-9                    # desplazamiento en s
+            dy = -0.45 if self.chk_ov_sep.isChecked() else 0.0
+            n_r = rd.shape[1]
+            # Referencia alineada por el trigger (t = 0), con su propia fs
+            for i in range(8):
+                v = rd[i]
+                tr = np.flatnonzero(v[1:] != v[:-1]) + 1
+                starts = np.concatenate(([0], tr))
+                y = v[starts].astype(float) * HI + ybase(i) + dy
+                x = (np.concatenate((starts, [n_r])).astype(float) - 0.5 - rt0) / rfs + sh
+                self.ref_curves[i].setData(x, y, stepMode="center")
+            # Diferencias evaluadas en la grilla de la captura actual
+            d, fs, t0 = self.data, self.fs, self.t0
+            n = d.shape[1]
+            t = (np.arange(n) - t0) / fs
+            ri = np.rint((t - sh) * rfs + rt0).astype(np.int64)
+            valid = (ri >= 0) & (ri < n_r)
+            ric = np.clip(ri, 0, n_r - 1)
+            report = []
+            for i in range(8):
+                diff = valid & (d[i] != rd[i][ric])
+                cnt = int(diff.sum())
+                if cnt:
+                    edges = np.flatnonzero(np.diff(np.concatenate(([0], diff.view(np.int8), [0]))))
+                    a, b = edges[0::2], edges[1::2]
+                    xs = np.empty(a.size * 3); ys = np.empty(a.size * 3)
+                    xs[0::3] = (a - 0.5 - t0) / fs
+                    xs[1::3] = (b - 0.5 - t0) / fs
+                    xs[2::3] = np.nan
+                    ys[:] = ybase(i) - (0.65 if self.chk_ov_sep.isChecked() else 0.35)
+                    ys[2::3] = np.nan
+                    self.diff_curves[i].setData(xs, ys, connect="finite")
+                    report.append(f"{self.ch_labels[i].split()[0]}: {cnt}")
+                else:
+                    self.diff_curves[i].setData([], [])
+            overlap = int(valid.sum())
+            msg = f"Superpuesta: {name} (trigger {'+' if sh >= 0 else ''}{pg.siFormat(sh, suffix='s')}). "
+            msg += ("Muestras distintas — " + ", ".join(report)) if report else "Sin diferencias en el tramo común."
+            msg += f"  [tramo común: {overlap} muestras]"
+            if abs(rfs - fs) > 1e-6 * fs:
+                msg += f"  · fs distintas ({pg.siFormat(rfs, suffix='S/s')} vs {pg.siFormat(fs, suffix='S/s')})"
+            self.statusBar().showMessage(msg)
 
         def _export_vcd(self):
             if self.data is None:
@@ -1350,6 +1599,7 @@ def main():
     app.setStyle("Fusion")
     app.setStyleSheet(QSS)
     w = MainWindow()
+    WINDOWS.append(w)
     w.show()
     if "pytest" not in sys.modules:
         app.exec()
