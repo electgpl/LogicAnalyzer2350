@@ -8,7 +8,7 @@
 
   Pines y canales del LA8:
     UART  TX  GPIO17  -> CH0   115200 8N1, "Electgpl\r\n"
-    SPI   SCK GPIO12  -> CH1   modo 0, 1 MHz, "Electgpl" con CS activo
+    SPI   SCK GPIO12  -> CH1   modo 0, 40 MHz (SPI_FREQ), "Electgpl" con CS activo
           MOSI GPIO11 -> CH2
           CS  GPIO10  -> CH3
     I2C   SDA GPIO8   -> CH4   100 kHz, escritura a 0x3C con "Electgpl"
@@ -48,7 +48,8 @@
 #define PIN_SPI_MOSI  11
 #define PIN_SPI_MISO  13          // no se usa
 #define PIN_SPI_CS    10
-#define SPI_FREQ      1000000
+#define SPI_FREQ      40000000    // 40 MHz. Valores exactos: 80 MHz / n -> 40, 26,67, 20, 16, 13,33, 10 MHz...
+                                  // (otros se redondean al divisor más cercano)
 #define SPI_MODE_SEL  SPI_MODE0
 
 #define PIN_I2C_SDA   8
