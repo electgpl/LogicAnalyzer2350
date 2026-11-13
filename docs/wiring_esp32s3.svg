@@ -1,0 +1,85 @@
+<svg xmlns='http://www.w3.org/2000/svg' width='1000' height='600' viewBox='0 0 1000 600' xmlns:c2pa="http://c2pa.org/manifest">
+<rect width='1000' height='600' rx='14' fill='#fafafa' stroke='#ddd'/>
+<text x='500.0' y='38' text-anchor='middle' font-size='22' font-weight='700' font-family='Segoe UI, Helvetica, Arial, sans-serif' fill='#8f0000'>GEN_Electgpl_S3 → LA8 wiring</text>
+<text x='500.0' y='62' text-anchor='middle' font-size='13' font-family='Segoe UI, Helvetica, Arial, sans-serif' fill='#555'>Direct 3.3 V connection · common GND is mandatory</text>
+<rect x='70' y='85' width='240' height='480' rx='10' fill='#1b1b1b'/>
+<text x='190.0' y='110' text-anchor='middle' font-size='15' font-weight='700' font-family='Segoe UI, Helvetica, Arial, sans-serif' fill='#fff'>ESP32-S3</text>
+<rect x='690' y='85' width='240' height='480' rx='10' fill='#1f6e3e'/>
+<text x='810.0' y='110' text-anchor='middle' font-size='15' font-weight='700' font-family='Segoe UI, Helvetica, Arial, sans-serif' fill='#fff'>Pico 2 (LA8)</text>
+<text x='86' y='145' font-size='13' font-weight='700' font-family='Segoe UI, Helvetica, Arial, sans-serif' fill='#fff'>GPIO17</text>
+<text x='296' y='145' text-anchor='end' font-size='12' font-family='Segoe UI, Helvetica, Arial, sans-serif' fill='#bbb'>UART TX</text>
+<circle cx='310' cy='140' r='5' fill='#2e7dd1'/>
+<text x='706' y='145' font-size='13' font-weight='700' font-family='Segoe UI, Helvetica, Arial, sans-serif' fill='#fff'>CH0</text>
+<text x='916' y='145' text-anchor='end' font-size='12' font-family='Segoe UI, Helvetica, Arial, sans-serif' fill='#cfe8d6'>GP0 · pin 1</text>
+<circle cx='690' cy='140' r='5' fill='#2e7dd1'/>
+<path d='M310 140 C 430 140, 570 140, 690 140' stroke='#2e7dd1' stroke-width='3' fill='none'/>
+<text x='86' y='179' font-size='13' font-weight='700' font-family='Segoe UI, Helvetica, Arial, sans-serif' fill='#fff'>GPIO12</text>
+<text x='296' y='179' text-anchor='end' font-size='12' font-family='Segoe UI, Helvetica, Arial, sans-serif' fill='#bbb'>SPI SCK</text>
+<circle cx='310' cy='174' r='5' fill='#8a3fd1'/>
+<text x='706' y='179' font-size='13' font-weight='700' font-family='Segoe UI, Helvetica, Arial, sans-serif' fill='#fff'>CH1</text>
+<text x='916' y='179' text-anchor='end' font-size='12' font-family='Segoe UI, Helvetica, Arial, sans-serif' fill='#cfe8d6'>GP1 · pin 2</text>
+<circle cx='690' cy='174' r='5' fill='#8a3fd1'/>
+<path d='M310 174 C 430 174, 570 174, 690 174' stroke='#8a3fd1' stroke-width='3' fill='none'/>
+<text x='86' y='213' font-size='13' font-weight='700' font-family='Segoe UI, Helvetica, Arial, sans-serif' fill='#fff'>GPIO11</text>
+<text x='296' y='213' text-anchor='end' font-size='12' font-family='Segoe UI, Helvetica, Arial, sans-serif' fill='#bbb'>SPI MOSI</text>
+<circle cx='310' cy='208' r='5' fill='#8a3fd1'/>
+<text x='706' y='213' font-size='13' font-weight='700' font-family='Segoe UI, Helvetica, Arial, sans-serif' fill='#fff'>CH2</text>
+<text x='916' y='213' text-anchor='end' font-size='12' font-family='Segoe UI, Helvetica, Arial, sans-serif' fill='#cfe8d6'>GP2 · pin 4</text>
+<circle cx='690' cy='208' r='5' fill='#8a3fd1'/>
+<path d='M310 208 C 430 208, 570 208, 690 208' stroke='#8a3fd1' stroke-width='3' fill='none'/>
+<text x='86' y='247' font-size='13' font-weight='700' font-family='Segoe UI, Helvetica, Arial, sans-serif' fill='#fff'>GPIO10</text>
+<text x='296' y='247' text-anchor='end' font-size='12' font-family='Segoe UI, Helvetica, Arial, sans-serif' fill='#bbb'>SPI CS</text>
+<circle cx='310' cy='242' r='5' fill='#8a3fd1'/>
+<text x='706' y='247' font-size='13' font-weight='700' font-family='Segoe UI, Helvetica, Arial, sans-serif' fill='#fff'>CH3</text>
+<text x='916' y='247' text-anchor='end' font-size='12' font-family='Segoe UI, Helvetica, Arial, sans-serif' fill='#cfe8d6'>GP3 · pin 5</text>
+<circle cx='690' cy='242' r='5' fill='#8a3fd1'/>
+<path d='M310 242 C 430 242, 570 242, 690 242' stroke='#8a3fd1' stroke-width='3' fill='none'/>
+<text x='86' y='281' font-size='13' font-weight='700' font-family='Segoe UI, Helvetica, Arial, sans-serif' fill='#fff'>GPIO8</text>
+<text x='296' y='281' text-anchor='end' font-size='12' font-family='Segoe UI, Helvetica, Arial, sans-serif' fill='#bbb'>I2C SDA</text>
+<circle cx='310' cy='276' r='5' fill='#2e9e5a'/>
+<text x='706' y='281' font-size='13' font-weight='700' font-family='Segoe UI, Helvetica, Arial, sans-serif' fill='#fff'>CH4</text>
+<text x='916' y='281' text-anchor='end' font-size='12' font-family='Segoe UI, Helvetica, Arial, sans-serif' fill='#cfe8d6'>GP4 · pin 6</text>
+<circle cx='690' cy='276' r='5' fill='#2e9e5a'/>
+<path d='M310 276 C 430 276, 570 276, 690 276' stroke='#2e9e5a' stroke-width='3' fill='none'/>
+<text x='86' y='315' font-size='13' font-weight='700' font-family='Segoe UI, Helvetica, Arial, sans-serif' fill='#fff'>GPIO9</text>
+<text x='296' y='315' text-anchor='end' font-size='12' font-family='Segoe UI, Helvetica, Arial, sans-serif' fill='#bbb'>I2C SCL</text>
+<circle cx='310' cy='310' r='5' fill='#2e9e5a'/>
+<text x='706' y='315' font-size='13' font-weight='700' font-family='Segoe UI, Helvetica, Arial, sans-serif' fill='#fff'>CH5</text>
+<text x='916' y='315' text-anchor='end' font-size='12' font-family='Segoe UI, Helvetica, Arial, sans-serif' fill='#cfe8d6'>GP5 · pin 7</text>
+<circle cx='690' cy='310' r='5' fill='#2e9e5a'/>
+<path d='M310 310 C 430 310, 570 310, 690 310' stroke='#2e9e5a' stroke-width='3' fill='none'/>
+<text x='86' y='349' font-size='13' font-weight='700' font-family='Segoe UI, Helvetica, Arial, sans-serif' fill='#fff'>GPIO4</text>
+<text x='296' y='349' text-anchor='end' font-size='12' font-family='Segoe UI, Helvetica, Arial, sans-serif' fill='#bbb'>SMBus SDA</text>
+<circle cx='310' cy='344' r='5' fill='#c27a1d'/>
+<text x='706' y='349' font-size='13' font-weight='700' font-family='Segoe UI, Helvetica, Arial, sans-serif' fill='#fff'>CH6</text>
+<text x='916' y='349' text-anchor='end' font-size='12' font-family='Segoe UI, Helvetica, Arial, sans-serif' fill='#cfe8d6'>GP6 · pin 9</text>
+<circle cx='690' cy='344' r='5' fill='#c27a1d'/>
+<path d='M310 344 C 430 344, 570 344, 690 344' stroke='#c27a1d' stroke-width='3' fill='none'/>
+<text x='86' y='383' font-size='13' font-weight='700' font-family='Segoe UI, Helvetica, Arial, sans-serif' fill='#fff'>GPIO5</text>
+<text x='296' y='383' text-anchor='end' font-size='12' font-family='Segoe UI, Helvetica, Arial, sans-serif' fill='#bbb'>SMBus SCL</text>
+<circle cx='310' cy='378' r='5' fill='#c27a1d'/>
+<text x='706' y='383' font-size='13' font-weight='700' font-family='Segoe UI, Helvetica, Arial, sans-serif' fill='#fff'>CH7</text>
+<text x='916' y='383' text-anchor='end' font-size='12' font-family='Segoe UI, Helvetica, Arial, sans-serif' fill='#cfe8d6'>GP7 · pin 10</text>
+<circle cx='690' cy='378' r='5' fill='#c27a1d'/>
+<path d='M310 378 C 430 378, 570 378, 690 378' stroke='#c27a1d' stroke-width='3' fill='none'/>
+<text x='86' y='417' font-size='13' font-weight='700' font-family='Segoe UI, Helvetica, Arial, sans-serif' fill='#fff'>GND</text>
+<text x='296' y='417' text-anchor='end' font-size='12' font-family='Segoe UI, Helvetica, Arial, sans-serif' fill='#bbb'>GND</text>
+<circle cx='310' cy='412' r='5' fill='#222'/>
+<text x='706' y='417' font-size='13' font-weight='700' font-family='Segoe UI, Helvetica, Arial, sans-serif' fill='#fff'>GND</text>
+<text x='916' y='417' text-anchor='end' font-size='12' font-family='Segoe UI, Helvetica, Arial, sans-serif' fill='#cfe8d6'>GND · pin 3/8/13</text>
+<circle cx='690' cy='412' r='5' fill='#222'/>
+<path d='M310 412 C 430 412, 570 412, 690 412' stroke='#222' stroke-width='3' fill='none'/>
+<text x='86' y='460' font-size='11' font-family='Segoe UI, Helvetica, Arial, sans-serif' fill='#999'>I2S test (replaces SPI on CH1–CH3)</text>
+<text x='86' y='487' font-size='13' font-weight='700' font-family='Segoe UI, Helvetica, Arial, sans-serif' fill='#fff'>GPIO6</text>
+<text x='296' y='487' text-anchor='end' font-size='12' font-family='Segoe UI, Helvetica, Arial, sans-serif' fill='#bbb'>I2S BCLK</text>
+<circle cx='310' cy='482' r='5' fill='#1d8f86'/>
+<path d='M310 482 C 470 482, 530 174, 690 174' stroke='#1d8f86' stroke-width='2' stroke-dasharray='6 5' fill='none'/>
+<text x='86' y='513' font-size='13' font-weight='700' font-family='Segoe UI, Helvetica, Arial, sans-serif' fill='#fff'>GPIO15</text>
+<text x='296' y='513' text-anchor='end' font-size='12' font-family='Segoe UI, Helvetica, Arial, sans-serif' fill='#bbb'>I2S SD</text>
+<circle cx='310' cy='508' r='5' fill='#1d8f86'/>
+<path d='M310 508 C 470 508, 530 208, 690 208' stroke='#1d8f86' stroke-width='2' stroke-dasharray='6 5' fill='none'/>
+<text x='86' y='539' font-size='13' font-weight='700' font-family='Segoe UI, Helvetica, Arial, sans-serif' fill='#fff'>GPIO7</text>
+<text x='296' y='539' text-anchor='end' font-size='12' font-family='Segoe UI, Helvetica, Arial, sans-serif' fill='#bbb'>I2S WS</text>
+<circle cx='310' cy='534' r='5' fill='#1d8f86'/>
+<path d='M310 534 C 470 534, 530 242, 690 242' stroke='#1d8f86' stroke-width='2' stroke-dasharray='6 5' fill='none'/>
+<metadata><c2pa:manifest>AAAWgmp1bWIAAAAeanVtZGMycGEAEQAQgAAAqgA4m3EDYzJwYQAAABZcanVtYgAAAEdqdW1kYzJtYQARABCAAACqADibcQN1cm46YzJwYTo1YmQ0ZjQ4Ny0xNWYwLTQzZTctYmUyNC00ZjQ5MTM2NTRhNjEAAAADl2p1bWIAAAApanVtZGMyYXMAEQAQgAAAqgA4m3EDYzJwYS5hc3NlcnRpb25zAAAAALxqdW1iAAAARGp1bWRjYm9yABEAEIAAAKoAOJtxE2MycGEuaW5ncmVkaWVudC52MwAAAAAYYzJzaHJ4iYZSbps4zqyxJIBsAJcAAABwY2JvcqNpZGM6Zm9ybWF0bWltYWdlL3N2Zyt4bWxqaW5zdGFuY2VJRHgseG1wOmlpZDo2OGFlMDQ2Zi1hZmVhLTRiYTUtODNhNS1kOTM0MmIxMTUyNzZscmVsYXRpb25zaGlwaHBhcmVudE9mAAAB4mp1bWIAAABBanVtZGNib3IAEQAQgAAAqgA4m3ETYzJwYS5hY3Rpb25zLnYyAAAAABhjMnNo0D27w5WNMpWLFo7EQcWZEAAAAZljYm9yomdhY3Rpb25zgqJmYWN0aW9ua2MycGEub3BlbmVkanBhcmFtZXRlcnOha2luZ3JlZGllbnRzgaJjdXJseC1zZWxmI2p1bWJmPWMycGEuYXNzZXJ0aW9ucy9jMnBhLmluZ3JlZGllbnQudjNkaGFzaFgg4a5PDkSW41CFjCFJ0+9zSJ9sTmTTGWB+b+cpStRML0OkZmFjdGlvbngdY29tLmFudGhyb3BpYy5jbGF1ZGUucHJvdmlkZWRqcGFyYW1ldGVyc6F4H2NvbS5hbnRocm9waWMub3JpZ2luLWNvbmZpZGVuY2VndW5rbm93bmtkZXNjcmlwdGlvbnhmQ2xhdWRlIHByb3ZpZGVkIHRoaXMgZmlsZSBhdCB0aGUgcmVxdWVzdCBvZiBhIHVzZXIgYW5kIG1heSBoYXZlIGNyZWF0ZWQgb3IgbW9kaWZpZWQgdGhlIGZpbGUgY29udGVudHMubXNvZnR3YXJlQWdlbnShZG5hbWVmQ2xhdWRlcmFsbEFjdGlvbnNJbmNsdWRlZPUAAADIanVtYgAAAEBqdW1kY2JvcgARABCAAACqADibcRNjMnBhLmhhc2guZGF0YQAAAAAYYzJzaDT6S7X7W+7K2dM83zKyJQcAAACAY2JvcqVjYWxnZnNoYTI1NmNwYWRMAAAAAAAAAAAAAAAAZGhhc2hYICyDsna/5cF5zqbMKBPw6CISVVfrFbIdJxxiL9RX23JRZG5hbWVuanVtYmYgbWFuaWZlc3RqZXhjbHVzaW9uc4GiZXN0YXJ0GSOQZmxlbmd0aBkeBAAAAj5qdW1iAAAAJ2p1bWRjMmNsABEAEIAAAKoAOJtxA2MycGEuY2xhaW0udjIAAAACD2Nib3KlY2FsZ2ZzaGEyNTZpc2lnbmF0dXJleE1zZWxmI2p1bWJmPS9jMnBhL3VybjpjMnBhOjViZDRmNDg3LTE1ZjAtNDNlNy1iZTI0LTRmNDkxMzY1NGE2MS9jMnBhLnNpZ25hdHVyZWppbnN0YW5jZUlEeCx4bXA6aWlkOjRlMGU3ZjdlLTgyNmUtNDhmYS1hMDU1LWE4YmZiN2E4MzdmMnJjcmVhdGVkX2Fzc2VydGlvbnODomN1cmx4LXNlbGYjanVtYmY9YzJwYS5hc3NlcnRpb25zL2MycGEuaW5ncmVkaWVudC52M2RoYXNoWCDhrk8ORJbjUIWMIUnT73NIn2xOZNMZYH5v5ylK1EwvQ6JjdXJseCpzZWxmI2p1bWJmPWMycGEuYXNzZXJ0aW9ucy9jMnBhLmFjdGlvbnMudjJkaGFzaFggUYliciv7OxgrQG2C81HDce419BTa5VKuMmmMdf2MVOyiY3VybHgpc2VsZiNqdW1iZj1jMnBhLmFzc2VydGlvbnMvYzJwYS5oYXNoLmRhdGFkaGFzaFgg26pkK6hNU8oYCcFpsVO90D60Hw/px6ArsnmxrsaMCuF0Y2xhaW1fZ2VuZXJhdG9yX2luZm+jZG5hbWVvQW50aHJvcGljIEZpbGVzZ3ZlcnNpb25lMS4wLjBrc3BlY1ZlcnNpb25lMi40LjAAABA4anVtYgAAAChqdW1kYzJjcwARABCAAACqADibcQNjMnBhLnNpZ25hdHVyZQAAABAIY2JvctKEWQISogEmGCFZAgowggIGMIIBjaADAgECAhRA5aAK7sI50L64g/oGQgU9Z1UTADAKBggqhkjOPQQDAzBJMRcwFQYDVQQKEw5BbnRocm9waWMsIFBCQzEuMCwGA1UEAxMlQW50aHJvcGljIENvbnRlbnQgQ3JlZGVudGlhbHMgUm9vdCBDQTAeFw0yNjA4MDcxODQzNTZaFw0yODA4MDYxOTQzNTZaMEQxFzAVBgNVBAoTDkFudGhyb3BpYywgUEJDMSkwJwYDVQQDEyBBbnRocm9waWMgQ2xhdWRlIENvbnRlbnQgU2lnbmluZzBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABJh6CmvLUBgFFNU0vUKlOVtE6djd17L5SuwX0LemFisBM3dkd/3cyjxFA3Qo5S46fX0/ihY0VZ7mfb9KF703t5OjWDBWMA4GA1UdDwEB/wQEAwIHgDAVBgNVHSUEDjAMBgorBgEEAYPoXgIBMAwGA1UdEwEB/wQCMAAwHwYDVR0jBBgwFoAUzlHiBIFOZFsj+OPEz5o+nMHXXMIwCgYIKoZIzj0EAwMDZwAwZAIwMXMdFJ4BetLLVY7ORuE9noqbbAZOZn/aArXyTwFAZfKrPzxF2vPoJNf1+UCdg1XGAjBwX1zd9WGqYkqmL5SFqw1QySjr1zJfpJM9+1rdDwSPLMOPOjKuiXjoU/pUUeG9RwmhY3BhZFkNngAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPZYQEqtCCy4V9rkBT+ySLuuhVeJC8ju55LA66G22JYIQs5gGfo0QNcfOfBS9jN/Ue8G8G9oZP46ObedLULpooLsjic=</c2pa:manifest></metadata></svg>
